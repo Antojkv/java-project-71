@@ -1,34 +1,34 @@
 .DEFAULT_GOAL := build-run
 
 setup:
-	./gradlew wrapper --gradle-version 9.2.1
+	cd app && ./gradlew wrapper --gradle-version 9.2.1
 
 clean:
-	./gradlew clean
+	cd app && ./gradlew clean
 
 build:
-	./gradlew clean build
+	cd app && ./gradlew clean build
 
 install:
-	./gradlew clean install
+	cd app && ./gradlew clean install
 
 run-dist:
-	./app/build/install/app/bin/app
+	cd app && ./build/install/app/bin/app $(ARGS)
 
 run:
-	./gradlew run
+	cd app && ./gradlew run
 
 test:
-	./gradlew test
+	cd app && ./gradlew test
 
 report:
-	./gradlew jacocoTestReport
+	cd app && ./gradlew jacocoTestReport
 
 lint:
-	./gradlew spotlessApply
+	cd app && ./gradlew spotlessApply
 
 update-deps:
-	./gradlew refreshVersions
+	cd app && ./gradlew refreshVersions
 	# ./gradlew dependencyUpdates -Drevision=release
 
 
