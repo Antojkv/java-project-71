@@ -7,7 +7,7 @@ clean:
 	cd app && ./gradlew clean
 
 build:
-	cd app && ./gradlew clean build
+	cd app && ./gradlew clean build test checkstyleMain checkstyleTest
 
 install:
 	cd app && ./gradlew clean install

@@ -3,6 +3,15 @@ plugins {
     id("checkstyle")
     id("java")
     id("com.github.ben-manes.versions") version "0.53.0"
+    id("org.sonarqube") version "7.2.1.6560"
+    jacoco
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "Antojkv_java-project-71")
+        property("sonar.organization", "antojkv")
+    }
 }
 
 checkstyle {
