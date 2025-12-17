@@ -11,6 +11,7 @@ sonar {
     properties {
         property("sonar.projectKey", "Antojkv_java-project-71")
         property("sonar.organization", "antojkv")
+        property("sonar.host.url", "https://sonarcloud.io")
     }
 }
 
