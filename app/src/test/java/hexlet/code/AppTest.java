@@ -9,7 +9,7 @@ public class AppTest {
     public void testSimpleMath() {
         assertEquals(4, 2 + 2, "2+2 должно быть 4");
     }
-    
+
     @Test
     public void testAppCreation() {
         App app = new App();
