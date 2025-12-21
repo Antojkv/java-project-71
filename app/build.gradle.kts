@@ -62,6 +62,7 @@ tasks.jacocoTestReport {
         csv.required = false
         html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
+    finalizedBy(tasks.named("fixJacocoReportNames"))
 }
 tasks.register("fixJacocoReportNames") {
     dependsOn(tasks.jacocoTestReport)
@@ -71,7 +72,6 @@ tasks.register("fixJacocoReportNames") {
             var content = reportFile.readText()
             content = content.replace("name=\"hexlet/code/", "name=\"hexlet.code.")
             reportFile.writeText(content)
-            println("Fixed class names in JaCoCo report for SonarCloud")
         }
     }
 }
