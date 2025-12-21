@@ -63,3 +63,15 @@ tasks.jacocoTestReport {
         html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
 }
+tasks.register("fixJacocoReportNames") {
+    dependsOn(tasks.jacocoTestReport)
+    doLast {
+        val reportFile = file("build/reports/jacoco/test/jacocoTestReport.xml")
+        if (reportFile.exists()) {
+            var content = reportFile.readText()
+            content = content.replace("name=\"hexlet/code/", "name=\"hexlet.code.")
+            reportFile.writeText(content)
+            println("Fixed class names in JaCoCo report for SonarCloud")
+        }
+    }
+}
