@@ -7,5 +7,5 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Antojkv_java-project-71&metric=coverage&ts=20251222)](https://sonarcloud.io/summary/new_code?id=Antojkv_java-project-71)
 
 ### Аскинемы:
-##### Запуск программы: https://asciinema.org/a/Ww9aMIMH4f5XbSWkIhBDaYXjG
-
+##### Запуск программы (файлы .json): https://asciinema.org/a/Ww9aMIMH4f5XbSWkIhBDaYXjG
+##### Запуск программы (файлы .yaml и .json): https://asciinema.org/a/PkqShxNuBDhOofbW0YskuCEHZ

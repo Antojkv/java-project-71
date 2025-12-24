@@ -51,4 +51,40 @@ public class DifferTest {
         assertTrue(result.startsWith("{"));
         assertTrue(result.endsWith("}"));
     }
+    @Test
+    public void testYamlIdenticalValues() throws Exception {
+        Path path1 = getFixturePath("identical1yaml.yaml");
+        Path path2 = getFixturePath("identical2yaml.yaml");
+
+        String result = Differ.generate(path1.toString(), path2.toString());
+
+        assertTrue(result.contains("    host: hexlet.io"));
+        assertTrue(result.contains("    timeout: 50"));
+        assertTrue(result.contains("    proxy: 123.234.53.22"));
+        assertTrue(result.contains("    follow: false"));
+
+        assertFalse(result.contains("  - "));
+        assertFalse(result.contains("  + "));
+
+        assertTrue(result.startsWith("{"));
+        assertTrue(result.endsWith("}"));
+    }
+
+    @Test
+    public void testYamlDifferentValues() throws Exception {
+        Path path1 = getFixturePath("diff1yaml.yaml");
+        Path path2 = getFixturePath("diff2yaml.yaml");
+
+        String result = Differ.generate(path1.toString(), path2.toString());
+
+        assertTrue(result.contains("    host: hexlet.io"));
+        assertTrue(result.contains("  + timeout: 20"));
+        assertTrue(result.contains("  - proxy: 123.234.53.22"));
+        assertTrue(result.contains("  + follow: true"));
+        assertTrue(result.contains("  + verbose: true"));
+
+        assertTrue(result.startsWith("{"));
+        assertTrue(result.endsWith("}"));
+    }
+
 }
