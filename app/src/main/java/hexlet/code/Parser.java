@@ -12,7 +12,7 @@ public class Parser {
         } else if (fileName.endsWith(".yaml") || fileName.endsWith(".yml")) {
             return "yaml";
         }
-        throw new RuntimeException("Unsupported file format: " + fileName);
+        throw new IllegalArgumentException("Unsupported file format: " + fileName);
     }
 
     public static Map<String, Object> parse(String content, String fileFormat) throws Exception {
@@ -23,7 +23,7 @@ public class Parser {
             case "yml":
                 return parseYaml(content);
             default:
-                throw new RuntimeException("Unsupported format: " + fileFormat);
+                throw new IllegalArgumentException("Unsupported format: " + fileFormat);
         }
     }
 

@@ -90,7 +90,7 @@ public class DifferTest {
     }
     @Test
     public void testUnsupportedFormatThrowsException() {
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+        RuntimeException exception = assertThrows(IllegalArgumentException.class, () -> {
             Parser.getFormat("file.txt");
         });
         assertEquals("Unsupported file format: file.txt", exception.getMessage());
