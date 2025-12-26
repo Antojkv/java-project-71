@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DifferTest {
@@ -86,5 +88,11 @@ public class DifferTest {
         assertTrue(result.startsWith("{"));
         assertTrue(result.endsWith("}"));
     }
-
+    @Test
+    public void testUnsupportedFormatThrowsException() {
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            Parser.getFormat("file.txt");
+        });
+        assertEquals("Unsupported file format: file.txt", exception.getMessage());
+    }
 }
