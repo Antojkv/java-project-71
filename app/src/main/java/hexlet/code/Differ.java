@@ -10,6 +10,8 @@ import java.util.TreeSet;
 import java.util.Objects;
 
 public class Differ {
+    private static final String STATUS = "status";
+    private static final String VALUE = "value";
     public static String generate(String filePath1, String filePath2) throws Exception {
         String content1 = Files.readString(Paths.get(filePath1));
         String content2 = Files.readString(Paths.get(filePath2));
@@ -29,25 +31,25 @@ public class Differ {
             if (inMap1 && !inMap2) {
                 Map<String, Object> diff1 = new HashMap<>();
                 diff1.put("key", key);
-                diff1.put("status", "removed");
-                diff1.put("value", value1);
+                diff1.put(STATUS, "removed");
+                diff1.put(VALUE, value1);
                 result.add(diff1);
             } else if (!inMap1 && inMap2) {
                 Map<String, Object> diff2 = new HashMap<>();
                 diff2.put("key", key);
-                diff2.put("status", "added");
-                diff2.put("value", value2);
+                diff2.put(STATUS, "added");
+                diff2.put(VALUE, value2);
                 result.add(diff2);
             } else if (Objects.equals(value1, value2)) {
                 Map<String, Object> diff3 = new HashMap<>();
                 diff3.put("key", key);
-                diff3.put("status", "unchanged");
-                diff3.put("value", value2);
+                diff3.put(STATUS, "unchanged");
+                diff3.put(VALUE, value2);
                 result.add(diff3);
             } else {
                 Map<String, Object> diff4 = new HashMap<>();
                 diff4.put("key", key);
-                diff4.put("status", "changed");
+                diff4.put(STATUS, "changed");
                 diff4.put("oldValue", value1);
                 diff4.put("newValue", value2);
                 result.add(diff4);
@@ -61,8 +63,8 @@ public class Differ {
 
         for (var diff : result) {
             String key = (String) diff.get("key");
-            String status = (String) diff.get("status");
-            var value = diff.get("value");
+            String status = (String) diff.get(STATUS);
+            var value = diff.get(VALUE);
 
             switch (status) {
                 case "removed":
