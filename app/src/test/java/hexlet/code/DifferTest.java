@@ -25,10 +25,18 @@ public class DifferTest {
 
         String result = Differ.generate(path1.toString(), path2.toString());
 
-        assertTrue(result.contains("    host: hexlet.io"));
-        assertTrue(result.contains("    timeout: 50"));
-        assertTrue(result.contains("    proxy: 123.234.53.22"));
-        assertTrue(result.contains("    follow: false"));
+        assertTrue(result.contains("    setting1: Some value"));
+        assertTrue(result.contains("    setting2: 200"));
+        assertTrue(result.contains("    setting3: true"));
+        assertTrue(result.contains("    key1: value1"));
+        assertTrue(result.contains("    numbers1: [1, 2, 3, 4]"));
+        assertTrue(result.contains("    numbers2: [2, 3, 4, 5]"));
+        assertTrue(result.contains("    id: 45"));
+        assertTrue(result.contains("    default: null"));
+        assertTrue(result.contains("    checked: false"));
+        assertTrue(result.contains("    numbers3: [3, 4, 5]"));
+        assertTrue(result.contains("    chars1: [a, b, c]"));
+        assertTrue(result.contains("    chars2: [d, e, f]"));
 
         assertFalse(result.contains("  - "));
         assertFalse(result.contains("  + "));
@@ -44,11 +52,29 @@ public class DifferTest {
 
         String result = Differ.generate(path1.toString(), path2.toString());
 
-        assertTrue(result.contains("    host: hexlet.io"));
-        assertTrue(result.contains("  + timeout: 20"));
-        assertTrue(result.contains("  - proxy: 123.234.53.22"));
-        assertTrue(result.contains("  + follow: true"));
-        assertTrue(result.contains("  + verbose: true"));
+        assertTrue(result.contains("    chars1: [a, b, c]"));
+        assertTrue(result.contains("  - chars2: [d, e, f]"));
+        assertTrue(result.contains("  + chars2: false"));
+        assertTrue(result.contains("  - checked: false"));
+        assertTrue(result.contains("  + checked: true"));
+        assertTrue(result.contains("  - default: null"));
+        assertTrue(result.contains("  + default: [value1, value2]"));
+        assertTrue(result.contains("  - id: 45"));
+        assertTrue(result.contains("  + id: null"));
+        assertTrue(result.contains("  - key1: value1"));
+        assertTrue(result.contains("  + key2: value2"));
+        assertTrue(result.contains("    numbers1: [1, 2, 3, 4]"));
+        assertTrue(result.contains("  - numbers2: [2, 3, 4, 5]"));
+        assertTrue(result.contains("  + numbers2: [22, 33, 44, 55]"));
+        assertTrue(result.contains("  - numbers3: [3, 4, 5]"));
+        assertTrue(result.contains("  + numbers4: [4, 5, 6]"));
+        assertTrue(result.contains("  + obj1: {nestedKey=value, isNested=true}"));
+        assertTrue(result.contains("  - setting1: Some value"));
+        assertTrue(result.contains("  + setting1: Another value"));
+        assertTrue(result.contains("  - setting2: 200"));
+        assertTrue(result.contains("  + setting2: 300"));
+        assertTrue(result.contains("  - setting3: true"));
+        assertTrue(result.contains("  + setting3: none"));
 
         assertTrue(result.startsWith("{"));
         assertTrue(result.endsWith("}"));
@@ -60,10 +86,18 @@ public class DifferTest {
 
         String result = Differ.generate(path1.toString(), path2.toString());
 
-        assertTrue(result.contains("    host: hexlet.io"));
-        assertTrue(result.contains("    timeout: 50"));
-        assertTrue(result.contains("    proxy: 123.234.53.22"));
-        assertTrue(result.contains("    follow: false"));
+        assertTrue(result.contains("    setting1: Some value"));
+        assertTrue(result.contains("    setting2: 200"));
+        assertTrue(result.contains("    setting3: true"));
+        assertTrue(result.contains("    key1: value1"));
+        assertTrue(result.contains("    numbers1: [1, 2, 3, 4]"));
+        assertTrue(result.contains("    numbers2: [2, 3, 4, 5]"));
+        assertTrue(result.contains("    id: 45"));
+        assertTrue(result.contains("    default: null"));
+        assertTrue(result.contains("    checked: false"));
+        assertTrue(result.contains("    numbers3: [3, 4, 5]"));
+        assertTrue(result.contains("    chars1: [a, b, c]"));
+        assertTrue(result.contains("    chars2: [d, e, f]"));
 
         assertFalse(result.contains("  - "));
         assertFalse(result.contains("  + "));
@@ -79,18 +113,36 @@ public class DifferTest {
 
         String result = Differ.generate(path1.toString(), path2.toString());
 
-        assertTrue(result.contains("    host: hexlet.io"));
-        assertTrue(result.contains("  + timeout: 20"));
-        assertTrue(result.contains("  - proxy: 123.234.53.22"));
-        assertTrue(result.contains("  + follow: true"));
-        assertTrue(result.contains("  + verbose: true"));
+        assertTrue(result.contains("    chars1: [a, b, c]"));
+        assertTrue(result.contains("  - chars2: [d, e, f]"));
+        assertTrue(result.contains("  + chars2: false"));
+        assertTrue(result.contains("  - checked: false"));
+        assertTrue(result.contains("  + checked: true"));
+        assertTrue(result.contains("  - default: null"));
+        assertTrue(result.contains("  + default: [value1, value2]"));
+        assertTrue(result.contains("  - id: 45"));
+        assertTrue(result.contains("  + id: null"));
+        assertTrue(result.contains("  - key1: value1"));
+        assertTrue(result.contains("  + key2: value2"));
+        assertTrue(result.contains("    numbers1: [1, 2, 3, 4]"));
+        assertTrue(result.contains("  - numbers2: [2, 3, 4, 5]"));
+        assertTrue(result.contains("  + numbers2: [22, 33, 44, 55]"));
+        assertTrue(result.contains("  - numbers3: [3, 4, 5]"));
+        assertTrue(result.contains("  + numbers4: [4, 5, 6]"));
+        assertTrue(result.contains("  + obj1: {nestedKey=value, isNested=true}"));
+        assertTrue(result.contains("  - setting1: Some value"));
+        assertTrue(result.contains("  + setting1: Another value"));
+        assertTrue(result.contains("  - setting2: 200"));
+        assertTrue(result.contains("  + setting2: 300"));
+        assertTrue(result.contains("  - setting3: true"));
+        assertTrue(result.contains("  + setting3: none"));
 
         assertTrue(result.startsWith("{"));
         assertTrue(result.endsWith("}"));
     }
     @Test
     public void testUnsupportedFormatThrowsException() {
-        RuntimeException exception = assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             Parser.getFormat("file.txt");
         });
         assertEquals("Unsupported file format: file.txt", exception.getMessage());

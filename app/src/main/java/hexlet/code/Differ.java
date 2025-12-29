@@ -20,6 +20,11 @@ public class Differ {
         Map<String, Object> map1 = Parser.parse(content1, format);
         Map<String, Object> map2 = Parser.parse(content2, format);
 
+        List<Map<String, Object>> diff = buildDiff(map1, map2);
+        return StylishFormatter.format(diff);
+    }
+
+    public static List<Map<String, Object>> buildDiff(Map<String, Object> map1, Map<String, Object> map2) {
         TreeSet<String> allKeys = new TreeSet<>(map1.keySet());
         allKeys.addAll(map2.keySet());
         List<Map<String, Object>> result = new ArrayList<>();
@@ -55,38 +60,6 @@ public class Differ {
                 result.add(diff4);
             }
         }
-        return format(result);
-    }
-    public static String format(List<Map<String, Object>> result) {
-
-        StringBuilder output = new StringBuilder("{\n");
-
-        for (var diff : result) {
-            String key = (String) diff.get("key");
-            String status = (String) diff.get(STATUS);
-            var value = diff.get(VALUE);
-
-            switch (status) {
-                case "removed":
-                    output.append("  - " + key + ": " + value + "\n");
-                    break;
-                case "added":
-                    output.append("  + " + key + ": " + value + "\n");
-                    break;
-                case "unchanged":
-                    output.append("    " + key + ": " + value + "\n");
-                    break;
-                case "changed":
-                    var oldValue = diff.get("oldValue");
-                    var newValue = diff.get("newValue");
-                    output.append("  - " + key + ": " + oldValue + "\n");
-                    output.append("  + " + key + ": " + newValue + "\n");
-                    break;
-                default:
-                    throw new RuntimeException("Unknown status: " + status);
-            }
-        }
-        output.append("}");
-        return output.toString();
+        return result;
     }
 }
