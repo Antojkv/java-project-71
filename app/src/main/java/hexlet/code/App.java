@@ -22,7 +22,7 @@ class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        var diff = Differ.generate(filePath1.getPath(), filePath2.getPath());
+        var diff = Differ.generate(filePath1.getPath(), filePath2.getPath(), format);
         System.out.println(diff);
         return 0;
     }

@@ -10,9 +10,15 @@ import java.util.TreeSet;
 import java.util.Objects;
 
 public class Differ {
+
     private static final String STATUS = "status";
     private static final String VALUE = "value";
+
     public static String generate(String filePath1, String filePath2) throws Exception {
+        return generate(filePath1, filePath2, "stylish");
+    }
+
+    public static String generate(String filePath1, String filePath2, String formatName) throws Exception {
         String content1 = Files.readString(Paths.get(filePath1));
         String content2 = Files.readString(Paths.get(filePath2));
 
@@ -21,7 +27,7 @@ public class Differ {
         Map<String, Object> map2 = Parser.parse(content2, format);
 
         List<Map<String, Object>> diff = buildDiff(map1, map2);
-        return StylishFormatter.format(diff);
+        return Formatter.format(diff, formatName);
     }
 
     public static List<Map<String, Object>> buildDiff(Map<String, Object> map1, Map<String, Object> map2) {

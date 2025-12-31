@@ -10,3 +10,4 @@
 ##### Запуск программы (файлы .json): https://asciinema.org/a/Ww9aMIMH4f5XbSWkIhBDaYXjG
 ##### Запуск программы (файлы .yaml и .json): https://asciinema.org/a/PkqShxNuBDhOofbW0YskuCEHZ
 ##### Запуск программы c вложенными файлами (.yaml и .json) https://asciinema.org/a/ERFgZ0EP0mseZlYKkMaSulkqY
+##### Запуск программы c форматом "plain"  https://asciinema.org/a/ItEkMUC6Y0NFLAe9kuD4ZQuL0
