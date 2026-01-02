@@ -2,19 +2,12 @@ package hexlet.code.formatters;
 
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StylishFormatterTest {
-    private static Path getFixturePath(String fileName) {
-        return Paths.get("src", "test", "resources", "fixtures", fileName)
-                .toAbsolutePath()
-                .normalize();
-    }
 
     @Test
     public void testFormatEmptyDiff() {
