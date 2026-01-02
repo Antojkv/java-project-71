@@ -33,7 +33,7 @@ public class PlainFormatter {
         return output.toString();
     }
 
-    private static String formatValue(Object value) {
+    public static String formatValue(Object value) {
         if (value == null) {
             return "null";
         }

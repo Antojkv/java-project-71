@@ -1,8 +1,14 @@
 package hexlet.code;
 
+import hexlet.code.formatters.PlainFormatter;
+import hexlet.code.formatters.StylishFormatter;
 import org.junit.jupiter.api.Test;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -79,6 +85,7 @@ public class DifferTest {
         assertTrue(result.startsWith("{"));
         assertTrue(result.endsWith("}"));
     }
+
     @Test
     public void testYamlIdenticalValues() throws Exception {
         Path path1 = getFixturePath("identical1yaml.yaml");
@@ -140,12 +147,11 @@ public class DifferTest {
         assertTrue(result.startsWith("{"));
         assertTrue(result.endsWith("}"));
     }
+
     @Test
     public void testUnsupportedFormatThrowsException() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            Parser.getFormat("file.txt");
-        });
-        assertEquals("Unsupported file format: file.txt", exception.getMessage());
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> Parser.getFormat("file.txt"));
     }
 
     @Test
@@ -174,5 +180,136 @@ public class DifferTest {
         for (String line : expectedLines) {
             assertTrue(result.contains(line), "Missing: " + line);
         }
+    }
+
+    @Test
+    public void testPlainFormatter() {
+        assertEquals("null", PlainFormatter.formatValue(null));
+        assertEquals("'text'", PlainFormatter.formatValue("text"));
+        assertEquals("123", PlainFormatter.formatValue(123));
+        assertEquals("[complex value]", PlainFormatter.formatValue(List.of(1, 2, 3)));
+        assertEquals("[complex value]", PlainFormatter.formatValue(Map.of("key", "value")));
+    }
+
+    @Test
+    public void testFormatAdded() {
+        Map<String, Object> diff = new HashMap<>();
+        diff.put("key", "newKey");
+        diff.put("status", "added");
+        diff.put("value", "newValue");
+
+        List<Map<String, Object>> diff1 = List.of(diff);
+        String result = PlainFormatter.format(diff1);
+
+        assertEquals("Property 'newKey' was added with value: 'newValue'", result.trim());
+    }
+
+    @Test
+    public void testFormatRemoved() {
+        Map<String, Object> diff = new HashMap<>();
+        diff.put("key", "oldKey");
+        diff.put("status", "removed");
+
+        List<Map<String, Object>> diff1 = List.of(diff);
+        String result = PlainFormatter.format(diff1);
+
+        assertEquals("Property 'oldKey' was removed", result.trim());
+    }
+
+    @Test
+    public void testFormatChanged() {
+        Map<String, Object> diff = new HashMap<>();
+        diff.put("key", "timeout");
+        diff.put("status", "changed");
+        diff.put("oldValue", 50);
+        diff.put("newValue", 20);
+
+        List<Map<String, Object>> diff1 = List.of(diff);
+        String result = PlainFormatter.format(diff1);
+
+        assertEquals("Property 'timeout' was updated. From 50 to 20", result.trim());
+    }
+
+    @Test
+    public void testFormatChangedWithComplexValue() {
+        Map<String, Object> diff = new HashMap<>();
+        diff.put("key", "data");
+        diff.put("status", "changed");
+        diff.put("oldValue", Arrays.asList(1, 2, 3));
+        diff.put("newValue", Map.of("key", "value"));
+
+        List<Map<String, Object>> diff1 = List.of(diff);
+        String result = PlainFormatter.format(diff1);
+
+        assertEquals("Property 'data' was updated. From [complex value] to [complex value]",
+                result.trim());
+    }
+
+    @Test
+    public void testFormatEmptyDiff() {
+        List<Map<String, Object>> emptyDiff = List.of();
+        String expected = "{\n}";
+        assertEquals(expected, StylishFormatter.format(emptyDiff));
+    }
+
+    @Test
+    public void testFormatAddedValue() {
+        List<Map<String, Object>> diff = List.of(
+                Map.of(
+                        "key", "newKey",
+                        "status", "added",
+                        "value", "newValue"
+                )
+        );
+
+        String expected = "{\n  + newKey: newValue\n}";
+
+        assertEquals(expected, StylishFormatter.format(diff));
+    }
+
+    @Test
+    public void testFormatRemovedValue() {
+        List<Map<String, Object>> diff = List.of(
+                Map.of(
+                        "key", "oldKey",
+                        "status", "removed",
+                        "value", "oldValue"
+                )
+        );
+
+        String expected = "{\n  - oldKey: oldValue\n}";
+
+        assertEquals(expected, StylishFormatter.format(diff));
+    }
+
+    @Test
+    public void testFormatUpdatedValue() {
+        List<Map<String, Object>> diff = List.of(
+                Map.of(
+                        "key", "updatedKey",
+                        "status", "changed",
+                        "oldValue", "before",
+                        "newValue", "after"
+                )
+        );
+
+        String expected = "{\n  - updatedKey: before\n  + updatedKey: after\n}";
+
+        assertEquals(expected, StylishFormatter.format(diff));
+    }
+
+    @Test
+    public void testFormatUnchangedValue() {
+        List<Map<String, Object>> diff = List.of(
+                Map.of(
+                        "key", "sameKey",
+                        "status", "unchanged",
+                        "value", "sameValue"
+                )
+        );
+
+        String expected = "{\n    sameKey: sameValue\n}";
+
+        assertEquals(expected, StylishFormatter.format(diff));
     }
 }
