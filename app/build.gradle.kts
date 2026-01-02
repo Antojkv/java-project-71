@@ -20,6 +20,8 @@ sonar {
         property("sonar.sources", "src/main/java")
         property("sonar.tests", "src/test/java")
         property("sonar.sourceEncoding", "UTF-8")
+        property("sonar.dynamicAnalysis", "reuseReports")
+        property("sonar.language", "java")
     }
 }
 
@@ -71,4 +73,5 @@ tasks.jacocoTestReport {
 
 tasks.named("sonar").configure {
     dependsOn(tasks.jacocoTestReport)
+    mustRunAfter(tasks.jacocoTestReport)
 }
