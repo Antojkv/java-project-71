@@ -16,8 +16,10 @@ sonar {
             "build/reports/jacoco/test/jacocoTestReport.xml")
         property("sonar.java.coveragePlugin", "jacoco")
         property("sonar.java.binaries", "build/classes/java/main")
+        property("sonar.java.test.binaries", "build/classes/java/test")
         property("sonar.sources", "src/main/java")
         property("sonar.tests", "src/test/java")
+        property("sonar.sourceEncoding", "UTF-8")
     }
 }
 
@@ -50,29 +52,23 @@ application {
     mainClass.set("hexlet.code.App")
 }
 
+jacoco {
+    toolVersion = "0.8.9"
+}
+
 tasks.test {
     finalizedBy(tasks.jacocoTestReport)
 }
-tasks.jacocoTestReport {
-    dependsOn(tasks.test)
-}
 
 tasks.jacocoTestReport {
+    dependsOn(tasks.test)
     reports {
         xml.required = true
         csv.required = false
         html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
-    finalizedBy(tasks.named("fixJacocoReportNames"))
 }
-tasks.register("fixJacocoReportNames") {
+
+tasks.named("sonar").configure {
     dependsOn(tasks.jacocoTestReport)
-    doLast {
-        val reportFile = file("build/reports/jacoco/test/jacocoTestReport.xml")
-        if (reportFile.exists()) {
-            var content = reportFile.readText()
-            content = content.replace("name=\"hexlet/code/", "name=\"hexlet.code.")
-            reportFile.writeText(content)
-        }
-    }
 }
