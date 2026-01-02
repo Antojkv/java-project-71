@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PlainFormatter {
+    private static final String PROPERTY = "Property";
     public static String format(List<Map<String, Object>> result) {
         StringBuilder output = new StringBuilder();
 
@@ -13,14 +14,14 @@ public class PlainFormatter {
 
             switch (status) {
                 case "removed":
-                    output.append("Property '").append(key).append("' was removed\n");
+                    output.append(PROPERTY).append(" '").append(key).append("' was removed\n");
                     break;
                 case "added":
-                    output.append("Property '").append(key).append("' was added with value: ")
+                    output.append(PROPERTY).append(" '").append(key).append("' was added with value: ")
                             .append(formatValue(diff.get("value"))).append("\n");
                     break;
                 case "changed":
-                    output.append("Property '").append(key).append("' was updated. From ")
+                    output.append(PROPERTY).append(" '").append(key).append("' was updated. From ")
                             .append(formatValue(diff.get("oldValue"))).append(" to ")
                             .append(formatValue(diff.get("newValue"))).append("\n");
                     break;

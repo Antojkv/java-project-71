@@ -13,7 +13,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestPlainFormatter {
+public class PlainFormatterTest {
     private static Path getFixturePath(String fileName) {
         return Paths.get("src", "test", "resources", "fixtures", fileName)
                 .toAbsolutePath()

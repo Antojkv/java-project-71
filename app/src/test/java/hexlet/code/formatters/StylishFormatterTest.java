@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestStylishFormatter {
+public class StylishFormatterTest {
     private static Path getFixturePath(String fileName) {
         return Paths.get("src", "test", "resources", "fixtures", fileName)
                 .toAbsolutePath()
