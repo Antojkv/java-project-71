@@ -1,5 +1,7 @@
-package hexlet.code.formatters;
+package hexlet.code;
 
+import hexlet.code.formatters.PlainFormatter;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -13,7 +15,7 @@ public class PlainFormatterTest {
 
     @Test
     public void testPlainFormatter() {
-        assertEquals("null", PlainFormatter.formatValue(null));
+        Assertions.assertEquals("null", PlainFormatter.formatValue(null));
         assertEquals("'text'", PlainFormatter.formatValue("text"));
         assertEquals("123", PlainFormatter.formatValue(123));
         assertEquals("[complex value]", PlainFormatter.formatValue(List.of(1, 2, 3)));

@@ -75,3 +75,4 @@ tasks.named("sonar").configure {
     dependsOn(tasks.jacocoTestReport)
     mustRunAfter(tasks.jacocoTestReport)
 }
+

@@ -1,5 +1,7 @@
-package hexlet.code.formatters;
+package hexlet.code;
 
+import hexlet.code.formatters.StylishFormatter;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,7 +15,7 @@ public class StylishFormatterTest {
     public void testFormatEmptyDiff() {
         List<Map<String, Object>> emptyDiff = List.of();
         String expected = "{\n}";
-        assertEquals(expected, StylishFormatter.format(emptyDiff));
+        Assertions.assertEquals(expected, StylishFormatter.format(emptyDiff));
     }
 
     @Test
