@@ -1,6 +1,5 @@
-package hexlet.code;
+package hexlet.code.formatters;
 
-import hexlet.code.formatters.PlainFormatter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
