@@ -13,11 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PlainFormatterTest {
 
-    @BeforeEach
-    public void setUp() {
-        System.out.println("Запуск теста для " + this.getClass().getSimpleName());
-    }
-
     @Test
     public void testPlainFormatter() {
         Assertions.assertEquals("null", PlainFormatter.formatValue(null));

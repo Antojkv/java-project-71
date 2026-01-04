@@ -1,7 +1,6 @@
 package hexlet.code.formatters;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,11 +9,6 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StylishFormatterTest {
-
-    @BeforeEach
-    public void setUp() {
-        System.out.println("Запуск теста для " + this.getClass().getSimpleName());
-    }
 
     @Test
     public void testFormatEmptyDiff() {

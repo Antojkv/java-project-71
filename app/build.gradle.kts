@@ -12,12 +12,11 @@ sonar {
         property("sonar.projectKey", "Antojkv_java-project-71")
         property("sonar.organization", "antojkv")
         property("sonar.host.url", "https://sonarcloud.io")
-
-        // Минимальная конфигурация
         property("sonar.sources", "src/main/java")
         property("sonar.tests", "src/test/java")
         property("sonar.java.binaries", "build/classes/java/main")
         property("sonar.java.test.binaries", "build/classes/java/test")
+        property("sonar.inclusions", "src/main/java/**/*, src/test/java/**/*")
     }
 }
 
@@ -48,7 +47,6 @@ tasks.test {
     testLogging {
         showStandardStreams = true
 
-        // какие события показывать
         events(
             org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED,
             org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED,
@@ -57,10 +55,8 @@ tasks.test {
             org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR,
         )
 
-        // формат исключений
         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
 
-        // детали
         showExceptions = true
         showCauses = true
         showStackTraces = true
