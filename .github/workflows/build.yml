@@ -33,9 +33,10 @@ jobs:
       - name: Build and run tests with coverage
         run: cd app && ./gradlew clean test jacocoTestReport
       - name: Fix JaCoCo report format
-        run: cd app &&  sed -i 's|name="hexlet/code/formatters"|name="hexlet.code.formatters"|g' build/reports/jacoco/test/jacocoTestReport.xml
-            sed -i 's|name="hexlet/code"|name="hexlet.code"|g' build/reports/jacoco/test/jacocoTestReport.xml
-            sed -i 's|class name="hexlet/code/formatters/|class name="hexlet.code.formatters.|g' build/reports/jacoco/test/jacocoTestReport.xml
+        run: cd app && \
+            sed -i 's|name="hexlet/code/formatters"|name="hexlet.code.formatters"|g' build/reports/jacoco/test/jacocoTestReport.xml && \
+            sed -i 's|name="hexlet/code"|name="hexlet.code"|g' build/reports/jacoco/test/jacocoTestReport.xml && \
+            sed -i 's|class name="hexlet/code/formatters/|class name="hexlet.code.formatters.|g' build/reports/jacoco/test/jacocoTestReport.xml && \
             sed -i 's|class name="hexlet/code/|class name="hexlet.code.|g' build/reports/jacoco/test/jacocoTestReport.xml 
       - name: Build and analyze
         env:
