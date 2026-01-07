@@ -16,7 +16,7 @@ run-dist:
 	cd app && ./build/install/app/bin/app $(ARGS)
 
 run:
-	cd app && ./gradlew run
+	cd app && ./gradlew run --args="$(ARGS)"
 
 test:
 	cd app && ./gradlew test
