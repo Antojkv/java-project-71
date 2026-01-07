@@ -46,8 +46,8 @@ public class PlainFormatterTest {
     @Test
     public void testFormatChanged() {
         Map<String, Object> diff = new HashMap<>();
-        int oldTimeout = 50;
-        int newTimeout = 20;
+        final int oldTimeout = 50;
+        final int newTimeout = 20;
         diff.put("key", "timeout");
         diff.put("status", "changed");
         diff.put("oldValue", oldTimeout);
