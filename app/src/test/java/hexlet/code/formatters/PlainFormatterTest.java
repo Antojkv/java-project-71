@@ -2,7 +2,6 @@ package hexlet.code.formatters;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +14,7 @@ public class PlainFormatterTest {
     public void testPlainFormatter() {
         assertEquals("null", PlainFormatter.formatValue(null));
         assertEquals("'text'", PlainFormatter.formatValue("text"));
-        assertEquals("123", PlainFormatter.formatValue(123));
-        assertEquals("[complex value]", PlainFormatter.formatValue(List.of(1, 2, 3)));
+        assertEquals("[complex value]", PlainFormatter.formatValue(List.of("a", "b", "c")));
         assertEquals("[complex value]", PlainFormatter.formatValue(Map.of("key", "value")));
     }
 
@@ -48,10 +46,12 @@ public class PlainFormatterTest {
     @Test
     public void testFormatChanged() {
         Map<String, Object> diff = new HashMap<>();
+        int oldTimeout = 50;
+        int newTimeout = 20;
         diff.put("key", "timeout");
         diff.put("status", "changed");
-        diff.put("oldValue", 50);
-        diff.put("newValue", 20);
+        diff.put("oldValue", oldTimeout);
+        diff.put("newValue", newTimeout);
 
         List<Map<String, Object>> diff1 = List.of(diff);
         String result = PlainFormatter.format(diff1);
@@ -64,7 +64,7 @@ public class PlainFormatterTest {
         Map<String, Object> diff = new HashMap<>();
         diff.put("key", "data");
         diff.put("status", "changed");
-        diff.put("oldValue", Arrays.asList(1, 2, 3));
+        diff.put("oldValue", List.of("a", "b", "c"));
         diff.put("newValue", Map.of("key", "value"));
 
         List<Map<String, Object>> diff1 = List.of(diff);
