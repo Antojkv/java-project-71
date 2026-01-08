@@ -24,16 +24,16 @@ cd java-project-71/app
 2. **Способы запуска:**
 
 ###### Запуск приложения напрямую
-make run ARGS="-f json/stylish/plain filepath1.json filepath2.json"
+**make run ARGS="-f json/stylish/plain filepath1.json filepath2.json"**
 
 ###### Сборка проекта
-make build
+**make build**
 
 ###### Запуск после сборки 
-make run-dist ARGS="filepath1.json filepath2.json"
+**make run-dist ARGS="filepath1.json filepath2.json"**
 
 ###### Очистка собранных файлов
-make clean
+**make clean**
 
 
 ### Аскинемы:

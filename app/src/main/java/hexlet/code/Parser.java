@@ -1,39 +1,26 @@
 package hexlet.code;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.util.Map;
 
 public class Parser {
-    public static String getFormat(String fileName) {
-        if (fileName.endsWith(".json")) {
-            return "json";
-        } else if (fileName.endsWith(".yaml") || fileName.endsWith(".yml")) {
-            return "yaml";
-        }
-        throw new IllegalArgumentException("Unsupported file format: " + fileName);
-    }
 
-    public static Map<String, Object> parse(String content, String fileFormat) throws Exception {
-        switch (fileFormat.toLowerCase()) {
+    public static Map<String, Object> parse(String content, String dataFormat) throws JsonProcessingException {
+        ObjectMapper mapper;
+        switch (dataFormat.toLowerCase()) {
             case "json":
-                return parseJson(content);
+                mapper = new ObjectMapper();
+                break;
             case "yaml":
             case "yml":
-                return parseYaml(content);
+                mapper = new ObjectMapper(new YAMLFactory());
+                break;
             default:
-                throw new IllegalArgumentException("Unsupported format: " + fileFormat);
+                throw new IllegalArgumentException("Unsupported format: " + dataFormat);
         }
-    }
-
-    public static Map<String, Object> parseJson(String content) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(content, Map.class);
-    }
-
-    public static Map<String, Object> parseYaml(String content) throws Exception {
-        ObjectMapper mapper = new YAMLMapper();
         return mapper.readValue(content, Map.class);
     }
 }

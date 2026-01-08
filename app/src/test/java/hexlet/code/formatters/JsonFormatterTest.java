@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JsonFormatterTest {
     @Test
-    public void testFormatEmptyDiff() {
+    public void testFormatEmptyDiff() throws JsonProcessingException {
         List<Map<String, Object>> emptyDiff = List.of();
         String expected = "[ ]";
         assertEquals(expected, JsonFormatter.format(emptyDiff));

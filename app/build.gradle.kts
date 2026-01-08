@@ -1,7 +1,6 @@
 plugins {
     id("application")
     id("checkstyle")
-    id("java")
     id("com.github.ben-manes.versions") version "0.53.0"
     id("org.sonarqube") version "7.2.1.6560"
     id("jacoco")
