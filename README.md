@@ -1,4 +1,4 @@
-#Вычислитель отличий (java)
+# Вычислитель отличий (java)
 
 [![JavaCI](https://github.com/Antojkv/java-project-71/actions/workflows/build.yml/badge.svg)](https://github.com/Antojkv/java-project-71/actions/workflows/build.yml)
 [![Actions Status](https://github.com/Antojkv/java-project-71/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Antojkv/java-project-71/actions)
@@ -17,24 +17,30 @@
 
 1. **Клонируйте репозиторий:**
 
+```bash
 git clone https://github.com/Antojkv/java-project-71.git
-
 cd java-project-71/app
+```
 
 2. **Способы запуска:**
 
 ###### Запуск приложения напрямую
-**make run ARGS="-f json/stylish/plain filepath1.json filepath2.json"**
-
+```bash
+make run ARGS="-f json/plain/stylish src/main/resources/filepath1.json src/main/resources/filepath2.json"
+```
 ###### Сборка проекта
-**make build**
-
+```bash
+make build
+```
 ###### Запуск после сборки 
-**make run-dist ARGS="filepath1.json filepath2.json"**
-
+```bash
+make run-dist ARGS="src/main/resources/filepath1.json src/main/resources/filepath2.json"
+cd app && ./build/install/app/bin/app src/main/resources/filepath1.json src/main/resources/filepath2.json
+```
 ###### Очистка собранных файлов
-**make clean**
-
+```bash
+make clean
+```
 
 ### Аскинемы:
 #### Запуск программы сравнения двух конфигурационных файлов:

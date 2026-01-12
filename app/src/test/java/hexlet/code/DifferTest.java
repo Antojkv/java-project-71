@@ -24,13 +24,6 @@ public class DifferTest {
         return Files.readString(path);
     }
 
-    private static String normalize(String text) {
-        String result = text.replace("[ ", "[").replace(" ]", "]");
-        result = result.replace(" : ", ": ");
-        return result.trim();
-    }
-
-
     @Test
     public void testJsonStylish() throws Exception {
         String path1 = getFixturePath("diff1.json").toString();
@@ -39,7 +32,7 @@ public class DifferTest {
 
         String actual = Differ.generate(path1, path2, "stylish");
 
-        assertEquals(normalize(expected), normalize(actual));
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -50,7 +43,7 @@ public class DifferTest {
 
         String actual = Differ.generate(path1, path2, "plain");
 
-        assertEquals(normalize(expected), normalize(actual));
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -61,7 +54,7 @@ public class DifferTest {
 
         String actual = Differ.generate(path1, path2, "json");
 
-        assertEquals(normalize(expected), normalize(actual));
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -72,7 +65,7 @@ public class DifferTest {
 
         String actual = Differ.generate(path1, path2);
 
-        assertEquals(normalize(expected), normalize(actual));
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -83,7 +76,7 @@ public class DifferTest {
 
         String actual = Differ.generate(path1, path2, "stylish");
 
-        assertEquals(normalize(expected), normalize(actual));
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -94,7 +87,7 @@ public class DifferTest {
 
         String actual = Differ.generate(path1, path2, "plain");
 
-        assertEquals(normalize(expected), normalize(actual));
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -105,7 +98,7 @@ public class DifferTest {
 
         String actual = Differ.generate(path1, path2, "json");
 
-        assertEquals(normalize(expected), normalize(actual));
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -116,7 +109,7 @@ public class DifferTest {
 
         String actual = Differ.generate(path1, path2);
 
-        assertEquals(normalize(expected), normalize(actual));
+        assertEquals(expected, actual);
     }
 
     @Test

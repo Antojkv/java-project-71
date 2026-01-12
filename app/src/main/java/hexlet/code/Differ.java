@@ -15,7 +15,7 @@ public class Differ {
         } else if (fileName.endsWith(".yaml") || fileName.endsWith(".yml")) {
             return "yaml";
         }
-        throw new IllegalArgumentException("Unsupported file format: " + fileName);
+        return "";
     }
 
     public static String generate(String filePath1, String filePath2) throws Exception {
