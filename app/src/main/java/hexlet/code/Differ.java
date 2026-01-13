@@ -10,12 +10,14 @@ import static hexlet.code.BuildDiff.buildDiff;
 
 public class Differ {
     public static String getFormat(String fileName) {
-        if (fileName.endsWith(".json")) {
-            return "json";
-        } else if (fileName.endsWith(".yaml") || fileName.endsWith(".yml")) {
-            return "yaml";
+        if (fileName == null || fileName.isEmpty()) {
+            return "";
         }
-        return "";
+        int lastDotIndex = fileName.lastIndexOf('.');
+        if (lastDotIndex == -1 || lastDotIndex == fileName.length() - 1) {
+            return "";
+        }
+        return fileName.substring(lastDotIndex + 1).toLowerCase();
     }
 
     public static String generate(String filePath1, String filePath2) throws Exception {
